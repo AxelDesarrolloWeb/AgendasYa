@@ -14,7 +14,6 @@ class PaginasController
 {
     public static function index(Router $router)
     {
-        
         $eventos = Evento::ordenar('hora_id', 'ASC');
         $alertas = [];
 
@@ -63,15 +62,15 @@ class PaginasController
     public static function evento(Router $router)
     {
 
-        $router->render('paginas/agendasya', [
+        $router->render('paginas/sobre-nosotros', [
             'titulo' => 'Sobre AgendasYa'
         ]);
     }
 
-    public static function paquetes(Router $router)
+    public static function planes(Router $router)
     {
 
-        $router->render('paginas/paquetes', [
+        $router->render('paginas/planes', [
             'titulo' => 'Planes AgendasYa'
         ]);
     }
@@ -108,6 +107,22 @@ class PaginasController
         $router->render('paginas/conferencias', [
             'titulo' => 'Comentarios & Puntuaciones',
             'eventos' => $eventos_formateados
+        ]);
+    }
+
+    public static function mapa(Router $router)
+    {
+
+        $router->render('paginas/mapa', [
+            'titulo' => 'Mapa de Logeo'
+        ]);
+    }
+   
+    public static function cuenta(Router $router)
+    {
+
+        $router->render('paginas/mi-cuenta', [
+            'titulo' => 'Cuenta de usuario'
         ]);
     }
 

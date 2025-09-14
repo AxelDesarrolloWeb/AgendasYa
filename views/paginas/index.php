@@ -51,8 +51,6 @@ include_once __DIR__ . '/conferencias.php';
                     <nav class="speaker-sociales">
                         <?php
                         $redes = json_decode($ponente->redes);
-
-
                         ?>
 
                         <?php if (!empty($redes->facebook)) { ?>
@@ -106,8 +104,10 @@ include_once __DIR__ . '/conferencias.php';
     </div>
 </section>
 
+
+
 <div id="mapa" class="mapa"></div>
-    <a href="https://www.google.com/maps/d/u/0/viewer?ll=-34.63198345969997%2C-58.56577521582031&z=10&mid=1kAJoB2oAwZ4G-VOgZhWzLHg6zqk_VwI">Mapa Logeo</a>
+<a href="https://www.google.com/maps/d/u/0/viewer?ll=-34.63198345969997%2C-58.56577521582031&z=10&mid=1kAJoB2oAwZ4G-VOgZhWzLHg6zqk_VwI">Mapa Logeo</a>
 
 <section class="boletos">
     <h2 class="boletos__heading">Planes y Suscripciones</h2>
@@ -139,3 +139,8 @@ include_once __DIR__ . '/conferencias.php';
         </a>
     </div>
 </section>
+
+<!-- Script para poder buscar días demandados -->
+<?php
+$script = '<script src="build/js/buscador.js"></script>'
+?>

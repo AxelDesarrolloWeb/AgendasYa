@@ -476,13 +476,13 @@ h3 {
   margin: 3rem 0 1rem 0;
 }
 .eventos--workshops .eventos__heading {
-  color: #00d9FC;
+  color: #8B0834;
 }
 .eventos--workshops .evento__informacion {
-  background-color: #00d9FC;
+  background-color: #8B0834;
 }
 .eventos--workshops .evento__informacion:hover {
-  background-color: rgb(0, 173.0833333333, 201);
+  background-color: rgb(90.7755102041, 5.2244897959, 33.9591836735);
 }
 .eventos .swiper-button-next,
 .eventos .swiper-button-prev {
@@ -754,7 +754,7 @@ h3 {
   background-image: radial-gradient(at 90% 86%, hsl(340, 84%, 21%) 0px, transparent 50%), radial-gradient(at 38% 26%, hsl(340, 96%, 46%) 0px, transparent 50%), radial-gradient(at 61% 42%, hsl(340, 64%, 64%) 0px, transparent 50%), radial-gradient(at 13% 15%, hsl(340, 83%, 21%) 0px, transparent 50%), radial-gradient(at 26% 85%, hsl(340, 96%, 46%) 0px, transparent 50%), radial-gradient(at 14% 70%, hsl(340, 64%, 64%) 0px, transparent 50%);
 }
 .boleto--virtual {
-  background-color: #00d9FC;
+  background-color: #8B0834;
 }
 .boleto--gratis {
   background-color: #EA044E;
@@ -1049,6 +1049,7 @@ h3 {
   display: flex;
   justify-content: center;
   gap: 2rem;
+  align-items: center;
 }
 @media (min-width: 768px) {
   .header__navegacion {
@@ -1066,6 +1067,15 @@ h3 {
 .header__enlace:hover, .header__submit:hover {
   color: #EA044E;
   cursor: pointer;
+}
+.header__enlace--cuenta {
+  min-height: 6rem;
+  min-width: 6rem;
+  background-image: url(../img/mi-cuenta.jpeg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
 }
 .header__form {
   display: flex;
@@ -1633,7 +1643,7 @@ h3 {
   color: #EA044E;
 }
 .eventos-registro__heading--workshops {
-  color: #00d9FC;
+  color: #8B0834;
   margin-top: 5rem;
 }
 .eventos-registro__fecha {

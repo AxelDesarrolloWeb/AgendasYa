@@ -2,14 +2,17 @@
     <div class="header__contenedor">
         <nav class="header__navegacion">
 
-            <?php if(is_auth()) { ?>
-                <a href="<?php echo is_admin() ? '/admin/dashboard' : '/finalizar-registro'; ?>" class="header__enlace">Administrar</a>
+            <?php if (function_exists('is_auth') && is_auth()) { ?>
+                <a href="<?php echo (function_exists('is_admin') && is_admin()) ? '/admin/dashboard' : '/finalizar-registro'; ?>" class="header__enlace">Administrar</a>
                 <form method="POST" action="/logout" class="header__form">
                     <input type="submit" value="Cerrar Sesión" class="header__submit">
                 </form>
             <?php } else { ?>
                 <a href="/registro" class="header__enlace">Registro</a>
                 <a href="/login" class="header__enlace">Iniciar Sesión</a>
+                <a href="/mi-cuenta">
+                    <div class="header__enlace--cuenta"></div>
+                </a>
             <?php } ?>
         </nav>
 
@@ -35,10 +38,12 @@
             </h2>
         </a>
         <nav class="navegacion">
-            <a href="/devwebcamp" class="navegacion__enlace <?php echo pagina_actual('/devwebcamp') ? 'navegacion__enlace--actual' : ''; ?>">Evento</a>
-            <a href="/paquetes" class="navegacion__enlace <?php echo pagina_actual('/paquetes') ? 'navegacion__enlace--actual' : ''; ?>">Paquetes</a>
-            <a href="/workshops-conferencias" class="navegacion__enlace <?php echo pagina_actual('/workshops-conferencias') ? 'navegacion__enlace--actual' : ''; ?>">Comentarios / Puntuaciones</a>
+            <a href="/planes" class="navegacion__enlace <?php echo pagina_actual('/planes') ? 'navegacion__enlace--actual' : ''; ?>">Planes</a>
             <a href="/registro" class="navegacion__enlace <?php echo pagina_actual('/registro') ? 'navegacion__enlace--actual' : ''; ?>">Comprar Plan</a>
+            <a href="/agendaya" class="navegacion__enlace <?php echo pagina_actual('/agendaya') ? 'navegacion__enlace--actual' : ''; ?>">Agenda Ya!</a>
+            <a href="/publicaciones" class="navegacion__enlace <?php echo pagina_actual('/publicaciones') ? 'navegacion__enlace--actual' : ''; ?>">Publicaciones</a>
+            <a href="/sobre-nosotros" class="navegacion__enlace <?php echo function_exists('pagina_actual') && pagina_actual('/sobre-nosotros') ? 'navegacion__enlace--actual' : ''; ?>">Sobre Nosotros</a>
+            <a href="https://www.google.com/maps/d/u/0/viewer?ll=-34.63198345969997%2C-58.56577521582031&z=10&mid=1kAJoB2oAwZ4G-VOgZhWzLHg6zqk_VwI" target="_blank" class="navegacion__enlace <?php echo pagina_actual('/mapa') ? 'navegacion__enlace--actual' : ''; ?>">Mapa Logeo</a>
         </nav>
     </div>
 </div>
