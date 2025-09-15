@@ -2,19 +2,27 @@
     <div class="header__contenedor">
         <nav class="header__navegacion">
 
+            <?php
+            // ...existing code...
+            if (function_exists('is_auth') && is_auth()) {
+                // Obtén el usuario logeado (ajusta según tu sistema de sesiones)
+                $usuario = \Model\Usuario::find($_SESSION['id']);
+                $imagenPerfil = $usuario && $usuario->imagen ? '/imagenes/' . $usuario->imagen : '/build/img/mi-cuenta.jpeg';
+            }
+            ?>
+            <!-- ...existing code... -->
             <?php if (function_exists('is_auth') && is_auth()) { ?>
                 <a href="<?php echo (function_exists('is_admin') && is_admin()) ? '/admin/dashboard' : '/finalizar-registro'; ?>" class="header__enlace">Administrar</a>
                 <form method="POST" action="/logout" class="header__form">
                     <input type="submit" value="Cerrar Sesión" class="header__submit">
-                
                 </form>
                 <a href="/perfil">
-                    <div class="header__enlace--cuenta"></div>
+                    <img src="<?php echo $imagenPerfil; ?>" alt="Perfil" class="header__enlace--cuenta" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
                 </a>
             <?php } else { ?>
                 <a href="/registro" class="header__enlace">Registro</a>
                 <a href="/login" class="header__enlace">Iniciar Sesión</a>
-                
+
             <?php } ?>
         </nav>
 

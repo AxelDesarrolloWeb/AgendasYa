@@ -1071,7 +1071,6 @@ h3 {
 .header__enlace--cuenta {
   min-height: 6rem;
   min-width: 6rem;
-  background-image: url(../img/mi-cuenta.jpeg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
