@@ -59,7 +59,7 @@ class PaginasController
         ]);
     }
 
-    public static function evento(Router $router)
+    public static function sobre_nosotros(Router $router)
     {
 
         $router->render('paginas/sobre-nosotros', [
@@ -75,7 +75,7 @@ class PaginasController
         ]);
     }
 
-    public static function conferencias(Router $router) {
+    public static function publicaciones(Router $router) {
 
         $eventos = Evento::ordenar('hora_id', 'ASC');
 
@@ -118,11 +118,12 @@ class PaginasController
         ]);
     }
    
-    public static function cuenta(Router $router)
+
+    public static function agendaya(Router $router)
     {
 
-        $router->render('paginas/mi-cuenta', [
-            'titulo' => 'Cuenta de usuario'
+        $router->render('paginas/agendaya', [
+            'titulo' => 'Agenda Ya!'
         ]);
     }
 

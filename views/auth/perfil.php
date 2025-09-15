@@ -48,6 +48,34 @@
             <?php } ?>
         </div>
 
+        <div class="formulario__campo">
+        <label for="cuidad" class="formulario__label">Ciudad (1 por cuenta)</label>
+        <select
+            class="formulario__select"
+            id="cuidad"
+            name="cuidad_id"
+        >
+            <option value="">- Seleccionar Ciudad -</option>
+            <?php foreach($ciudades as $ciudad) { ?>
+                <option <?php echo ($usuario->ciudad_id === $ciudad->id) ? 'selected' : '' ?> value="<?php echo $ciudad->id; ?>"><?php echo $ciudad->nombre; ?></option>
+            <?php } ?>
+        </select>
+    </div> 
+
+
+<!-- Imprimir las zonas de logeo con su respectiva ciudad aquí o un link a su página de ejemplo. -->
+
+        <div class="formulario__campo">
+            <label for="zonas_input" class="formulario__label">Zonas de Logeo (separadas por coma)</label>
+            <input
+                type="text"
+                class="formulario__input"
+                id="zonas_input"
+                placeholder="Añade tus zonas de logeo">
+
+            <div id="zonas" class="formulario__listado"></div>
+            <input type="hidden" name="zonas" value="<?php echo $usuario->zonas ?? ''; ?>">
+        </div>
 
         <div class="formulario__campo">
             <label class="formulario__label" for="password">Password</label>

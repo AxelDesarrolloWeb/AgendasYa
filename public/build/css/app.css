@@ -1056,7 +1056,7 @@ h3 {
     justify-content: flex-end;
   }
 }
-.header__enlace, .header__submit {
+.header__enlace, .header__enlace__submit {
   all: unset;
   color: #FFFFFF;
   font-size: 1.4rem;
@@ -1064,7 +1064,7 @@ h3 {
   font-weight: 700;
   margin-right: 2rem;
 }
-.header__enlace:hover, .header__submit:hover {
+.header__enlace:hover, .header__enlace__submit:hover {
   color: #EA044E;
   cursor: pointer;
 }
@@ -1084,34 +1084,35 @@ h3 {
   color: #555;
   overflow: hidden;
 }
-.header__enlace-- {
-  background: #FFFFFF;
-  color: #1a1b15;
+.header__enlace----skeleton {
+  background: #bdbdbd;
+  color: #fff;
+  font-size: 1.5rem;
 }
-.header__form {
+.header__enlace__form {
   display: flex;
 }
-.header__contenido {
+.header__enlace__contenido {
   padding-top: 10rem;
 }
 @media (min-width: 768px) {
-  .header__contenido {
+  .header__enlace__contenido {
     padding-top: 5rem;
   }
 }
-.header__logo {
+.header__enlace__logo {
   background: linear-gradient(to right, #EA044E, #EA044E);
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-align: center;
 }
 @media (min-width: 768px) {
-  .header__logo {
+  .header__enlace__logo {
     text-align: left;
     display: inline-block;
   }
 }
-.header__texto {
+.header__enlace__texto {
   font-size: 3rem;
   font-weight: 700;
   color: #FFFFFF;
@@ -1120,14 +1121,14 @@ h3 {
   text-transform: uppercase;
 }
 @media (min-width: 768px) {
-  .header__texto {
+  .header__enlace__texto {
     text-align: left;
   }
 }
-.header__texto--modalidad {
+.header__enlace__texto--modalidad {
   font-size: 2rem;
 }
-.header__boton {
+.header__enlace__boton {
   background-color: #EA044E;
   padding: 1.5rem 4rem;
   color: #FFFFFF;
@@ -1142,11 +1143,11 @@ h3 {
   text-transform: uppercase;
   margin: 2rem 0;
 }
-.header__boton:hover {
+.header__enlace__boton:hover {
   cursor: pointer;
 }
 @media (min-width: 768px) {
-  .header__boton {
+  .header__enlace__boton {
     width: auto;
   }
 }

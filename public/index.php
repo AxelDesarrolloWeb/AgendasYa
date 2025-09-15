@@ -82,9 +82,10 @@ $router->get('/boleto', [RegistroController::class, 'boleto']);
 
 // Área Pública
 $router->get('/', [PaginasController::class, 'index']);
-$router->get('/devwebcamp', [PaginasController::class, 'evento']);
-$router->get('/paquetes', [PaginasController::class, 'paquetes']);
-$router->get('/workshops-conferencias', [PaginasController::class, 'conferencias']);
+$router->get('/sobre-nosotros', [PaginasController::class, 'sobre_nosotros']);
+$router->get('/planes', [PaginasController::class, 'planes']);
+$router->get('/publicaciones', [PaginasController::class, 'publicaciones']);
+$router->get('/agendaya', [PaginasController::class, 'agendaya']);
 $router->get('/404', [PaginasController::class, 'error']);
 
 $router->comprobarRutas();

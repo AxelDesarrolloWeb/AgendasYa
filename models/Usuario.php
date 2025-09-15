@@ -4,7 +4,7 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin', 'imagen'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin', 'imagen', 'cuidad', 'zonas'];
 
     public $id;
     public $nombre;
@@ -16,6 +16,8 @@ class Usuario extends ActiveRecord {
     public $token;
     public $admin;
     public $imagen;
+    public $cuidad;
+    public $zonas;
 
     public $password_actual;
     public $password_nuevo;
@@ -33,6 +35,8 @@ class Usuario extends ActiveRecord {
         $this->token = $args['token'] ?? '';
         $this->admin = $args['admin'] ?? 0;
         $this->imagen = $args['imagen'] ?? '';
+        $this->cuidad = $args['cuidad'] ?? '';
+        $this->zonas = $args['zonas'] ?? '';
     }
 
     // Validar el Login de Usuarios
@@ -63,6 +67,12 @@ class Usuario extends ActiveRecord {
         }
         if(!$this->imagen) {
             self::$alertas['error'][] = 'La imagen es obligatoria';
+        }
+        if(!$this->cuidad) {
+            self::$alertas['error'][] = 'La cuidad es obligatoria';
+        }
+        if(!$this->zonas) {
+            self::$alertas['error'][] = 'La zona es obligatoria';
         }
         if(!$this->password) {
             self::$alertas['error'][] = 'El Password no puede ir vacio';
