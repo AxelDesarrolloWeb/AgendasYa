@@ -3,26 +3,38 @@
         <nav class="header__navegacion">
 
             <?php
-            // ...existing code...
             if (function_exists('is_auth') && is_auth()) {
-                // Obtén el usuario logeado (ajusta según tu sistema de sesiones)
+
                 $usuario = \Model\Usuario::find($_SESSION['id']);
-                $imagenPerfil = $usuario && $usuario->imagen ? '/imagenes/' . $usuario->imagen : '/build/img/mi-cuenta.jpeg';
+                $tieneImagen = $usuario && $usuario->imagen;
+                $imagenPerfil = $tieneImagen ? '/imagenes/' . $usuario->imagen : '';
+                // Iniciales
+                $iniciales = '';
+                if ($usuario) {
+                    $nombre = explode(' ', trim($usuario->nombre));
+                    $apellido = explode(' ', trim($usuario->apellido));
+                    $iniciales = strtoupper(substr($nombre[0], 0, 1) . (isset($apellido[0]) ? substr($apellido[0], 0, 1) : ''));
+                }
             }
+
             ?>
-            <!-- ...existing code... -->
             <?php if (function_exists('is_auth') && is_auth()) { ?>
                 <a href="<?php echo (function_exists('is_admin') && is_admin()) ? '/admin/dashboard' : '/finalizar-registro'; ?>" class="header__enlace">Administrar</a>
                 <form method="POST" action="/logout" class="header__form">
                     <input type="submit" value="Cerrar Sesión" class="header__submit">
                 </form>
                 <a href="/perfil">
-                    <img src="<?php echo $imagenPerfil; ?>" alt="Perfil" class="header__enlace--cuenta" style="width:48px;height:48px;object-fit:cover;border-radius:50%;">
+                    <?php if ($tieneImagen) { ?>
+                        <img src="<?php echo $imagenPerfil; ?>" alt="Perfil" class="header__enlace--cuenta">
+                    <?php } else { ?>
+                        <div class="header__enlace--cuenta header__enlace--skeleton">
+                            <?php echo $iniciales ?: '<span class="material-icons">person</span>'; ?>
+                        </div>
+                    <?php } ?>
                 </a>
             <?php } else { ?>
                 <a href="/registro" class="header__enlace">Registro</a>
                 <a href="/login" class="header__enlace">Iniciar Sesión</a>
-
             <?php } ?>
         </nav>
 
