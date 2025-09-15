@@ -1,12 +1,12 @@
 <main class="auth">
     <h2 class="auth__heading"><?php echo $titulo; ?></h2>
-    <p class="auth__texto">Regístrate en AgendasYa</p>
+    <p class="auth__texto">Tu Cuenta en AgendasYa</p>
 
     <?php
     require_once __DIR__ . '/../templates/alertas.php';
     ?>
 
-    <form class="formulario" method="POST" action="/registro">
+    <form class="formulario" method="POST" action="/actualizar" enctype="multipart/form-data">
         <div class="formulario__campo">
             <label class="formulario__label" for="nombre">Nombre</label>
             <input
@@ -48,6 +48,7 @@
             <?php } ?>
         </div>
 
+
         <div class="formulario__campo">
             <label class="formulario__label" for="password">Password</label>
             <input
@@ -55,8 +56,7 @@
                 class="formulario__input"
                 placeholder="Tu Password"
                 id="password"
-                name="password"
-                value="<?php echo $usuario->password ?>" />
+                name="password" />
         </div>
 
         <div class="formulario__campo">
@@ -69,11 +69,11 @@
                 name="password2" />
         </div>
 
-        <input type="submit" class="formulario__submit" value="Crear Cuenta">
+        <input type="submit" class="formulario__submit" value="Actualizar Perfil">
     </form>
 
-    <div class="acciones">
+    <!-- <div class="acciones">
         <a href="/login" class="acciones__enlace">¿Ya tienes una cuenta? Iniciar Sesión</a>
         <a href="/olvide" class="acciones__enlace">¿Olvidaste tu Password? Resetear Password</a>
-    </div>
+    </div> -->
 </main>

@@ -4,7 +4,7 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin'];
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin', 'imagen'];
 
     public $id;
     public $nombre;
@@ -15,6 +15,7 @@ class Usuario extends ActiveRecord {
     public $confirmado;
     public $token;
     public $admin;
+    public $imagen;
 
     public $password_actual;
     public $password_nuevo;
@@ -31,6 +32,7 @@ class Usuario extends ActiveRecord {
         $this->confirmado = $args['confirmado'] ?? 0;
         $this->token = $args['token'] ?? '';
         $this->admin = $args['admin'] ?? 0;
+        $this->imagen = $args['imagen'] ?? '';
     }
 
     // Validar el Login de Usuarios
@@ -59,6 +61,9 @@ class Usuario extends ActiveRecord {
         if(!$this->email) {
             self::$alertas['error'][] = 'El Email es Obligatorio';
         }
+        if(!$this->imagen) {
+            self::$alertas['error'][] = 'La imagen es obligatoria';
+        }
         if(!$this->password) {
             self::$alertas['error'][] = 'El Password no puede ir vacio';
         }
@@ -70,6 +75,7 @@ class Usuario extends ActiveRecord {
         }
         return self::$alertas;
     }
+    
 
     // Valida un email
     public function validarEmail() {

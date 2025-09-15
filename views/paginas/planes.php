@@ -1,6 +1,6 @@
 <main class="planes">
     <h2 class="planes__heading"><?php echo $titulo; ?></h2>
-    <p class="planes__descripcion">Compara los planes de DevWebCamp</p>
+    <p class="planes__descripcion">Compara los planes de AgendasYa</p>
 
     <div class="planes__grid">
         <div class="plan">

@@ -22,6 +22,11 @@ $router->get('/login', [AuthController::class, 'login']);
 $router->post('/login', [AuthController::class, 'login']);
 $router->post('/logout', [AuthController::class, 'logout']);
 
+// Perfil
+$router->get('/perfil', [AuthController::class, 'perfil']);
+$router->get('/cuenta', [AuthController::class, 'perfil']);
+$router->post('/actualizar', [AuthController::class, 'perfil']);
+
 // Crear Cuenta
 $router->get('/registro', [AuthController::class, 'registro']);
 $router->post('/registro', [AuthController::class, 'registro']);

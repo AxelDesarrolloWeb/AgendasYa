@@ -395,7 +395,7 @@ h3 {
   line-height: 2;
 }
 
-.paquetes__grid {
+.planes__grid {
   width: min(95%, 140rem);
   margin: 0 auto;
   display: grid;
@@ -403,14 +403,14 @@ h3 {
   grid-template-columns: repeat(1, 1fr);
 }
 @media (min-width: 768px) {
-  .paquetes__grid {
+  .planes__grid {
     display: grid;
     gap: 3rem;
     grid-template-columns: repeat(3, 1fr);
     align-items: flex-start;
   }
 }
-.paquetes__submit {
+.planes__submit {
   background-color: #EA044E;
   padding: 1.5rem 4rem;
   color: #FFFFFF;
@@ -424,34 +424,34 @@ h3 {
   display: inline-block;
   margin-top: 3rem;
 }
-.paquetes__submit:hover {
+.planes__submit:hover {
   cursor: pointer;
 }
 
-.paquete {
+.plan {
   border: 1px solid rgb(127.050209205, 141.7782426778, 162.949790795);
   padding: 3rem;
 }
-.paquete__nombre {
+.plan__nombre {
   font-weight: 900;
   font-size: 2.6rem;
   margin: 3rem;
 }
-.paquete:nth-child(2), .paquete:nth-child(3) {
+.plan:nth-child(2), .plan:nth-child(3) {
   order: -1;
 }
 @media (min-width: 768px) {
-  .paquete:nth-child(2), .paquete:nth-child(3) {
+  .plan:nth-child(2), .plan:nth-child(3) {
     order: unset;
   }
 }
-.paquete__lista {
+.plan__lista {
   margin: 0;
   padding: 0;
   list-style: none;
   line-height: 2;
 }
-.paquete__precio {
+.plan__precio {
   font-size: 3rem;
   margin: 3rem 0;
   color: #EA044E;

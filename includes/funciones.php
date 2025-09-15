@@ -1,4 +1,6 @@
 <?php
+define('CARPETA_IMAGENES', __DIR__ . '/../public/imagenes/');
+// define('CARPETA_IMAGENES', $_SERVER['DOCUMENT_ROOT'] . '/imagenes/');
 
 function debuguear($variable): string
 {

@@ -101,7 +101,7 @@ class RegistroController
         $registro->paquete = Paquete::find($registro->paquete_id);
 
         $router->render('registro/boleto', [
-            'titulo' => 'Asistencia a DevWebCamp',
+            'titulo' => 'Tu plan actual en AgendasYa',
             'registro' => $registro
         ]);
     }
