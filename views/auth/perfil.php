@@ -49,23 +49,34 @@
         </div>
 
         <div class="formulario__campo">
-        <label for="cuidad" class="formulario__label">Ciudad (1 por cuenta)</label>
-        <select
-            class="formulario__select"
-            id="cuidad"
-            name="cuidad_id"
-        >
-            <option value="">- Seleccionar Ciudad -</option>
-            <?php foreach($ciudades as $ciudad) { ?>
-                <option <?php echo ($usuario->ciudad_id === $ciudad->id) ? 'selected' : '' ?> value="<?php echo $ciudad->id; ?>"><?php echo $ciudad->nombre; ?></option>
-            <?php } ?>
-        </select>
-    </div> 
+            <label for="cuidad" class="formulario__label">Ciudad (1 por cuenta)</label>
+            <select
+                class="formulario__select"
+                id="cuidad"
+                name="cuidad_id">
+                <option value="">- Seleccionar Ciudad -</option>
+                <?php foreach ($ciudades as $ciudad) { ?>
+                    <option <?php echo ($usuario->ciudad_id === $ciudad->id) ? 'selected' : '' ?> value="<?php echo $ciudad->id; ?>"><?php echo $ciudad->nombre; ?></option>
+                <?php } ?>
+            </select>
+        </div>
 
 
-<!-- Imprimir las zonas de logeo con su respectiva ciudad aquí o un link a su página de ejemplo. -->
+        <!-- Imprimir las zonas de logeo con su respectiva ciudad aquí o un link a su página de ejemplo. -->
 
-        <div class="formulario__campo">
+        <div id="zonas" class="formulario__campo">
+            <label class="formulario__label">Seleccionar Zonas</label>
+
+            <ul id="zonas" class="zonas">
+                <?php foreach ($zonas as $zona) { ?>
+                    <li data-zona-id="<?php echo $zona->id; ?>" class="zonas__zona zonas__zona--deshabilitada"><?php echo $zona->nombres; ?></li>
+                <?php } ?>
+            </ul>
+
+            <input type="hidden" name="zona_id" value="<?php echo $evento->zona_id; ?>">
+        </div>
+
+        <!-- <div class="formulario__campo">
             <label for="zonas_input" class="formulario__label">Zonas de Logeo (separadas por coma)</label>
             <input
                 type="text"
@@ -74,8 +85,8 @@
                 placeholder="Añade tus zonas de logeo">
 
             <div id="zonas" class="formulario__listado"></div>
-            <input type="hidden" name="zonas" value="<?php echo $usuario->zonas ?? ''; ?>">
-        </div>
+            <input type="hidden" name="zonas" value="<php echo $usuario->zonas ?? ''; ?>">
+        </div> -->
 
         <div class="formulario__campo">
             <label class="formulario__label" for="password">Password</label>

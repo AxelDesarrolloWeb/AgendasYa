@@ -2,13 +2,13 @@
 
 namespace Model;
 
-class Dia extends ActiveRecord
+class Ciudades extends ActiveRecord
 {
-    protected static $tabla = 'dias';
+    protected static $tabla = 'ciudades';
     protected static $columnasDB = ['id', 'nombre'];
 
     public $id;
     public $nombre;
-    
+
 
 }

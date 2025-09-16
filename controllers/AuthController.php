@@ -4,9 +4,11 @@ namespace Controllers;
 
 require_once __DIR__ . '/../includes/funciones.php';
 
+use MVC\Router;
+use Model\Zonas;
 use Classes\Email;
 use Model\Usuario;
-use MVC\Router;
+use Model\Ciudades;
 
 $carpeta_imagenes = CARPETA_IMAGENES;
 class AuthController
@@ -148,6 +150,11 @@ class AuthController
         $usuario = Usuario::find($_SESSION['id']);
         $alertas = [];
 
+        // Obtener todas las zonas
+        $zonas = Zonas::all();
+        // Obtener todas las ciudades
+        $ciudades = Ciudades::all();
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sincroniza los datos del usuario
             $usuario->sincronizar($_POST);
@@ -185,6 +192,8 @@ class AuthController
         $router->render('auth/perfil', [
             'titulo' => 'Mi Perfil',
             'usuario' => $usuario,
+            'zonas' => $zonas,
+            'ciudades' => $ciudades,
             'alertas' => $alertas
         ]);
     }
