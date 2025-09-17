@@ -231,6 +231,7 @@ class AuthController
             'zonas' => $zonas,
             'ciudades' => $ciudades,
             'zonasPorCiudad' => $zonasPorCiudad,
+            'UsuarioZona' => $UsuarioZona,
             'alertas' => $alertas
         ]);
     }

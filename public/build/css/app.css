@@ -394,6 +394,9 @@ h3 {
 .agendasya__texto {
   line-height: 2;
 }
+.agendasya .fc .fc-daygrid-day.fc-day-today {
+  background-color: #EA044E;
+}
 
 .planes__grid {
   width: min(95%, 140rem);
