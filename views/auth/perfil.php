@@ -48,45 +48,30 @@
             <?php } ?>
         </div>
 
-        <div class="formulario__campo">
-            <label for="cuidad" class="formulario__label">Ciudad (1 por cuenta)</label>
-            <select
-                class="formulario__select"
-                id="cuidad"
-                name="cuidad_id">
-                <option value="">- Seleccionar Ciudad -</option>
-                <?php foreach ($ciudades as $ciudad) { ?>
-                    <option <?php echo ($usuario->ciudad_id === $ciudad->id) ? 'selected' : '' ?> value="<?php echo $ciudad->id; ?>"><?php echo $ciudad->nombre; ?></option>
-                <?php } ?>
-            </select>
-        </div>
+        <<!-- Selector de ciudad -->
+<div class="formulario__campo">
+    <label for="ciudad" class="formulario__label">Ciudad (1 por cuenta)</label>
+    <select class="formulario__select" id="ciudad" name="ciudad_id">
+        <option value="">- Seleccionar Ciudad -</option>
+        <?php foreach ($ciudades as $ciudad) { ?>
+            <option value="<?php echo $ciudad->id; ?>" <?php echo ($usuario->ciudad_id ?? null) === $ciudad->id ? 'selected' : '' ?>>
+                <?php echo $ciudad->nombre; ?>
+            </option>
+        <?php } ?>
+    </select>
+</div>
 
 
-        <!-- Imprimir las zonas de logeo con su respectiva ciudad aquí o un link a su página de ejemplo. -->
 
-        <div id="zonas" class="formulario__campo">
-            <label class="formulario__label">Seleccionar Zonas</label>
+<!-- Selector de zonas (multi-selección tipo horas) -->
+<div class="formulario__campo">
+    <label class="formulario__label">Seleccionar Zonas</label>
+    <ul id="zonas" class="horas zonas"></ul>
+    <input type="hidden" name="zonas_ids" id="zonas_ids" value="<?php echo isset($usuario->zonas_ids) ? implode(',', $usuario->zonas_ids) : ''; ?>">
+    <div id="mensaje-zonas" class="formulario__mensaje"></div>
+</div>
 
-            <ul id="zonas" class="zonas">
-                <?php foreach ($zonas as $zona) { ?>
-                    <li data-zona-id="<?php echo $zona->id; ?>" class="zonas__zona zonas__zona--deshabilitada"><?php echo $zona->nombres; ?></li>
-                <?php } ?>
-            </ul>
 
-            <input type="hidden" name="zona_id" value="<?php echo $evento->zona_id; ?>">
-        </div>
-
-        <!-- <div class="formulario__campo">
-            <label for="zonas_input" class="formulario__label">Zonas de Logeo (separadas por coma)</label>
-            <input
-                type="text"
-                class="formulario__input"
-                id="zonas_input"
-                placeholder="Añade tus zonas de logeo">
-
-            <div id="zonas" class="formulario__listado"></div>
-            <input type="hidden" name="zonas" value="<php echo $usuario->zonas ?? ''; ?>">
-        </div> -->
 
         <div class="formulario__campo">
             <label class="formulario__label" for="password">Password</label>
@@ -116,3 +101,50 @@
         <a href="/olvide" class="acciones__enlace">¿Olvidaste tu Password? Resetear Password</a>
     </div> -->
 </main>
+
+<script>
+    const zonasPorCiudad = <?php echo json_encode($zonasPorCiudad); ?>;
+    const ciudadSelect = document.getElementById('ciudad');
+    const zonasUl = document.getElementById('zonas');
+    const zonasInput = document.getElementById('zonas_ids');
+    const mensajeZonas = document.getElementById('mensaje-zonas');
+    const zonasUsuario = zonasInput.value ? zonasInput.value.split(',') : [];
+
+    function actualizarZonas() {
+        const ciudadId = ciudadSelect.value;
+        zonasUl.innerHTML = '';
+        if (!ciudadId) {
+            mensajeZonas.textContent = 'Selecciona una ciudad para mostrar sus zonas de logeo.';
+            return;
+        }
+        mensajeZonas.textContent = '';
+        if (zonasPorCiudad[ciudadId]) {
+            zonasPorCiudad[ciudadId].forEach(zona => {
+                const li = document.createElement('li');
+                li.classList.add('horas__hora');
+                li.textContent = zona.nombres;
+                li.dataset.zonaId = zona.id;
+                if (zonasUsuario.includes(zona.id.toString())) {
+                    li.classList.add('horas__hora--seleccionada');
+                }
+                li.addEventListener('click', function() {
+                    li.classList.toggle('horas__hora--seleccionada');
+                    actualizarInputZonas();
+                });
+                zonasUl.appendChild(li);
+            });
+        }
+        actualizarInputZonas();
+    }
+
+    function actualizarInputZonas() {
+        const seleccionadas = [];
+        zonasUl.querySelectorAll('.horas__hora--seleccionada').forEach(li => {
+            seleccionadas.push(li.dataset.zonaId);
+        });
+        zonasInput.value = seleccionadas.join(',');
+    }
+
+    ciudadSelect.addEventListener('change', actualizarZonas);
+    window.addEventListener('DOMContentLoaded', actualizarZonas);
+</script>

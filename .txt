@@ -1,4 +1,37 @@
-(37, 'Beccar');
+INSERT INTO `zonas` (`id`, `nombres`, `ciudad_id`) VALUES
+(4, 'Lp centro nuevo', 4),
+(5, 'Gonnet centro nuevo', 4),
+(6, 'City bell nuevo', 4),
+(7, 'Moreno nuevo', NULL),
+(8, 'Merlo nuevo', NULL),
+(9, 'Padua nuevo', NULL),
+(10, 'Ituzaingo nuevo', NULL),
+(11, 'Leloir nuevo', NULL),
+(12, 'Acceso oeste nuevo', NULL),
+(13, 'Calle santa rosa nuevo', NULL),
+(14, 'Moron nuevo', NULL),
+(15, 'Estacion castelar nuevo', NULL),
+(16, 'Villa tesei nuevo', NULL),
+(17, 'Haedo nuevo', NULL),
+(18, 'Luzuriaga nuevo', NULL),
+(19, 'Ramos mejia nuevo', NULL),
+(20, 'San justo nuevo', NULL),
+(21, 'Laferrere centro nuevo', NULL),
+(22, 'Lomas del mirador nuevo', NULL),
+(23, 'Caseros nuevo', NULL),
+(24, 'Palomar nuevo', NULL),
+(25, 'Santos lugares nuevo', NULL),
+(26, 'Saenz peña', NULL),
+(27, 'Hurlingham nuevo', NULL),
+(28, 'William c morris nuevo', NULL),
+(29, 'Bella vista nuevo', NULL),
+(30, 'San miguel nuevo', NULL),
+(32, 'Jose c paz nuevo', NULL),
+(33, 'Grand bourg nuevo', NULL),
+(34, 'Estacion polvorines nuevo', NULL),
+(35, 'Don torcuato nuevo', NULL),
+(36, 'Lomas de san isidro', NULL),
+(37, 'Boulogne', NULL);
 (38, 'Boulogne');
 (39, 'Boulogne');
 (40, 'Boulogne');
@@ -25,3 +58,16 @@
 (61, 'Boulogne');
 (62, 'Boulogne');
 (63, 'Boulogne');
+
+
+LAS CIUDADES:
+INSERT INTO `ciudades` (`id`, `nombre`) VALUES
+(1, 'GBA Oeste');
+INSERT INTO `ciudades` (`id`, `nombre`) VALUES
+(2, 'CABA');
+INSERT INTO `ciudades` (`id`, `nombre`) VALUES
+(3, 'GBA Sur');
+INSERT INTO `ciudades` (`id`, `nombre`) VALUES
+(4, 'La plata'),
+(5, 'GBA Norté'),
+(6, 'Luján');

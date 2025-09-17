@@ -10,6 +10,4 @@ class Zonas extends ActiveRecord
     public $id;
     public $nombres;
     public $ciudad_id;
-
-
 }

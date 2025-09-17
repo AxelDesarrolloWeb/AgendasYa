@@ -88,19 +88,19 @@ class AuthController
                 $existeUsuario = Usuario::where('email', $usuario->email);
 
                 $permitidos = ['image/jpeg', 'image/png'];
-            if (in_array($_FILES['imagen']['type'], $permitidos)) {
-                // Procesar imagen
-                // Procesa la imagen si se subió
-                if (isset($_FILES['imagen']) && $_FILES['imagen']['tmp_name']) {
-                    $carpeta_imagenes = __DIR__ . '/../public/imagenes/';
-                    if (!is_dir($carpeta_imagenes)) {
-                        mkdir($carpeta_imagenes, 0777, true);
+                if (in_array($_FILES['imagen']['type'], $permitidos)) {
+                    // Procesar imagen
+                    // Procesa la imagen si se subió
+                    if (isset($_FILES['imagen']) && $_FILES['imagen']['tmp_name']) {
+                        $carpeta_imagenes = __DIR__ . '/../public/imagenes/';
+                        if (!is_dir($carpeta_imagenes)) {
+                            mkdir($carpeta_imagenes, 0777, true);
+                        }
+                        $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+                        move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_imagenes . $nombreImagen);
+                        $usuario->imagen = $nombreImagen;
                     }
-                    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-                    move_uploaded_file($_FILES['imagen']['tmp_name'], $carpeta_imagenes . $nombreImagen);
-                    $usuario->imagen = $nombreImagen;
                 }
-            }
 
                 if ($existeUsuario) {
                     Usuario::setAlerta('error', 'El Usuario ya esta registrado');
@@ -150,10 +150,13 @@ class AuthController
         $usuario = Usuario::find($_SESSION['id']);
         $alertas = [];
 
-        // Obtener todas las zonas
-        $zonas = Zonas::all();
-        // Obtener todas las ciudades
         $ciudades = Ciudades::all();
+        $zonas = Zonas::all();
+        // Agrupa zonas por ciudad
+        $zonasPorCiudad = [];
+        foreach ($zonas as $zona) {
+            $zonasPorCiudad[$zona->ciudad_id][] = $zona;
+        }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sincroniza los datos del usuario
@@ -189,11 +192,16 @@ class AuthController
             }
         }
 
+
+        $zonas_ids = isset($_POST['zonas_ids']) ? explode(',', $_POST['zonas_ids']) : [];
+        // Valida que las zonas existan y pertenezcan a la ciudad seleccionada
+
         $router->render('auth/perfil', [
             'titulo' => 'Mi Perfil',
             'usuario' => $usuario,
             'zonas' => $zonas,
             'ciudades' => $ciudades,
+            'zonasPorCiudad' => $zonasPorCiudad,
             'alertas' => $alertas
         ]);
     }
