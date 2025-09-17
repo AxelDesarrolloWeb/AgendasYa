@@ -9,6 +9,7 @@ use Model\Zonas;
 use Classes\Email;
 use Model\Usuario;
 use Model\Ciudades;
+use Model\UsuarioZona;
 
 $carpeta_imagenes = CARPETA_IMAGENES;
 class AuthController
@@ -156,6 +157,34 @@ class AuthController
         $zonasPorCiudad = [];
         foreach ($zonas as $zona) {
             $zonasPorCiudad[$zona->ciudad_id][] = $zona;
+        }
+
+        // ...existing code...
+        $zonas_ids = isset($_POST['zonas_ids']) ? explode(',', $_POST['zonas_ids']) : [];
+        $ciudad_id = $_POST['ciudad_id'] ?? null;
+
+        // Validar que todas las zonas existen y pertenecen a la ciudad seleccionada
+        $zonas_validas = [];
+        if ($ciudad_id && !empty($zonas_ids)) {
+            foreach ($zonas_ids as $zona_id) {
+                $zona = Zonas::find($zona_id);
+                if ($zona && $zona->ciudad_id == $ciudad_id) {
+                    $zonas_validas[] = $zona_id;
+                }
+            }
+            if (count($zonas_validas) !== count($zonas_ids)) {
+                $alertas['error'][] = 'Una o más zonas seleccionadas no corresponden a la ciudad elegida.';
+            }
+        }
+        // Elimina zonas anteriores
+        UsuarioZona::eliminarPorUsuario($usuario->id);
+
+        // Guarda nuevas zonas
+        foreach ($zonas_validas as $zona_id) {
+            $usuarioZona = new UsuarioZona();
+            $usuarioZona->usuario_id = $usuario->id;
+            $usuarioZona->zona_id = $zona_id;
+            $usuarioZona->guardar();
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
