@@ -33,6 +33,8 @@
   "dependencies": {
     "chart.js": "^4.5.0",
     "fullcalendar": "^6.1.19",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "sweetalert2": "^11.23.0",
     "swiper": "^11.2.10",
     "webpack-stream": "^7.0.0"

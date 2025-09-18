@@ -1,4 +1,29 @@
+# Ignore vendor directories (Composer dependencies)
 /vendor/
+
+# Ignore Node.js modules (npm dependencies)
 /node_modules/
+
+# Ignore source code (src directory)
 /src/
+
+# Ignore environment variables (dotenv)
 .env
+
+# Ignore ESLint configuration
+eslint.config
+
+# Ignore package lock file (npm/yarn)
+package-lock.json
+
+# Ignore package file (npm/yarn)
+package.json
+
+# Ignore Vite configuration
+vite.config.js
+
+# Ignore text files (txt)
+.txt
+
+# Ignore my-react-app directory (React app)
+/my-react-app/
