@@ -159,43 +159,39 @@ class AuthController
             $zonasPorCiudad[$zona->ciudad_id][] = $zona;
         }
 
-        // ...existing code...
-        $zonas_ids = isset($_POST['zonas_ids']) ? explode(',', $_POST['zonas_ids']) : [];
-        $ciudad_id = $_POST['ciudad_id'] ?? null;
-
-        // Validar que todas las zonas existen y pertenecen a la ciudad seleccionada
-        $zonas_validas = [];
-        if ($ciudad_id && !empty($zonas_ids)) {
-            foreach ($zonas_ids as $zona_id) {
-                $zona = Zonas::find($zona_id);
-                if ($zona && $zona->ciudad_id == $ciudad_id) {
-                    $zonas_validas[] = $zona_id;
-                }
-            }
-            if (count($zonas_validas) !== count($zonas_ids)) {
-                $alertas['error'][] = 'Una o más zonas seleccionadas no corresponden a la ciudad elegida.';
-            }
-        }
-        // Elimina zonas anteriores
-        UsuarioZona::eliminarPorUsuario($usuario->id);
-
-        // Guarda nuevas zonas
-        foreach ($zonas_validas as $zona_id) {
-            $usuarioZona = new UsuarioZona();
-            $usuarioZona->usuario_id = $usuario->id;
-            $usuarioZona->zona_id = $zona_id;
-            $usuarioZona->guardar();
+        // Obtener zonas ya asignadas al usuario para preselección en UI
+        $relaciones = UsuarioZona::whereArray(['usuario_id' => $usuario->id]) ?? [];
+        $zonas_ids_usuario = [];
+        foreach ($relaciones as $rel) {
+            $zonas_ids_usuario[] = (int)$rel->zona_id;
         }
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Sincroniza los datos del usuario
             $usuario->sincronizar($_POST);
 
+            // Procesar Ciudad y Zonas desde POST
+            $ciudad_id = $_POST['ciudad_id'] ?? null;
+            $zonas_ids = isset($_POST['zonas_ids']) ? array_filter(array_map('intval', explode(',', $_POST['zonas_ids']))) : [];
+
+            // Validar que todas las zonas existen y pertenecen a la ciudad seleccionada
+            $zonas_validas = [];
+            if ($ciudad_id && !empty($zonas_ids)) {
+                foreach ($zonas_ids as $zona_id) {
+                    $zona = Zonas::find($zona_id);
+                    if ($zona && $zona->ciudad_id == $ciudad_id) {
+                        $zonas_validas[] = $zona_id;
+                    }
+                }
+                if (count($zonas_validas) !== count($zonas_ids)) {
+                    $alertas['error'][] = 'Una o más zonas seleccionadas no corresponden a la ciudad elegida.';
+                }
+            }
+
             $permitidos = ['image/jpeg', 'image/png'];
-            if (in_array($_FILES['imagen']['type'], $permitidos)) {
-                // Procesar imagen
-                // Procesa la imagen si se subió
-                if (isset($_FILES['imagen']) && $_FILES['imagen']['tmp_name']) {
+            if (isset($_FILES['imagen']) && isset($_FILES['imagen']['type']) && in_array($_FILES['imagen']['type'], $permitidos)) {
+                // Procesar imagen si se subió
+                if (!empty($_FILES['imagen']['tmp_name'])) {
                     $carpeta_imagenes = __DIR__ . '/../public/imagenes/';
                     if (!is_dir($carpeta_imagenes)) {
                         mkdir($carpeta_imagenes, 0777, true);
@@ -206,8 +202,8 @@ class AuthController
                 }
             }
 
-
-            $alertas = $usuario->validar_cuenta();
+            // Validaciones de perfil (más flexibles que las de registro)
+            $alertas = $usuario->validarPerfil();
 
             if (empty($alertas)) {
                 if (!empty($usuario->password)) {
@@ -216,14 +212,24 @@ class AuthController
                         $usuario->password = password_hash($usuario->password, PASSWORD_BCRYPT);
                     }
                 }
+                // Guardar datos del usuario
                 $usuario->guardar();
+
+                // Persistir zonas (si hubo selección válida)
+                if (!empty($zonas_validas)) {
+                    UsuarioZona::eliminarPorUsuario($usuario->id);
+                    foreach ($zonas_validas as $zona_id) {
+                        $usuarioZona = new UsuarioZona();
+                        $usuarioZona->usuario_id = $usuario->id;
+                        $usuarioZona->zona_id = $zona_id;
+                        $usuarioZona->guardar();
+                    }
+                    $zonas_ids_usuario = $zonas_validas; // actualizar preselección
+                }
+
                 $alertas['exito'][] = 'Perfil actualizado correctamente';
             }
         }
-
-
-        $zonas_ids = isset($_POST['zonas_ids']) ? explode(',', $_POST['zonas_ids']) : [];
-        // Valida que las zonas existan y pertenezcan a la ciudad seleccionada
 
         $router->render('auth/perfil', [
             'titulo' => 'Mi Perfil',
@@ -231,7 +237,7 @@ class AuthController
             'zonas' => $zonas,
             'ciudades' => $ciudades,
             'zonasPorCiudad' => $zonasPorCiudad,
-            'UsuarioZona' => $UsuarioZona,
+            'zonas_ids_usuario' => $zonas_ids_usuario,
             'alertas' => $alertas
         ]);
     }

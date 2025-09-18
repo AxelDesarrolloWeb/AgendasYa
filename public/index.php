@@ -7,6 +7,7 @@ use Controllers\APIEventos;
 use Controllers\APIPonentes;
 use Controllers\APIRegalos;
 use Controllers\APIClima;
+use Controllers\APIZonas;
 use Controllers\AuthController;
 use Controllers\EventosController;
 use Controllers\PaginasController;
@@ -67,6 +68,7 @@ $router->get('/api/ponentes', [APIPonentes::class, 'index']);
 $router->get('/api/ponente', [APIPonentes::class, 'ponente']);
 $router->get('/api/regalos', [APIRegalos::class, 'index']);
 $router->get('/api/clima', [APIClima::class, 'index']);
+$router->get('/api/mis-zonas', [APIZonas::class, 'misZonas']);
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 

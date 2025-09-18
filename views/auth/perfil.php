@@ -48,30 +48,27 @@
             <?php } ?>
         </div>
 
-        <<!-- Selector de ciudad -->
-<div class="formulario__campo">
-    <label for="ciudad" class="formulario__label">Ciudad (1 por cuenta)</label>
-    <select class="formulario__select" id="ciudad" name="ciudad_id">
-        <option value="">- Seleccionar Ciudad -</option>
-        <?php foreach ($ciudades as $ciudad) { ?>
-            <option value="<?php echo $ciudad->id; ?>" <?php echo ($usuario->ciudad_id ?? null) === $ciudad->id ? 'selected' : '' ?>>
-                <?php echo $ciudad->nombre; ?>
-            </option>
-        <?php } ?>
-    </select>
-</div>
+        <!-- Selector de ciudad -->
+        <div class="formulario__campo">
+            <label for="ciudad" class="formulario__label">Ciudad (1 por cuenta)</label>
+            <select class="formulario__select" id="ciudad" name="ciudad_id">
+                <option value="">- Seleccionar Ciudad -</option>
+                <?php foreach ($ciudades as $ciudad) { ?>
+                    <option value="<?php echo $ciudad->id; ?>" <?php echo ((string)($usuario->ciudad_id ?? '')) === (string)$ciudad->id ? 'selected' : '' ?>>
+                        <?php echo $ciudad->nombre; ?>
+                    </option>
+                <?php } ?>
+            </select>
+        </div>
 
+        <!-- Selector de zonas (multi-selección tipo horas) -->
+        <div class="formulario__campo">
+            <label class="formulario__label">Seleccionar Zonas</label>
+            <ul id="zonas" class="horas zonas"></ul>
+            <input type="hidden" name="zonas_ids" id="zonas_ids" value="<?php echo !empty($zonas_ids_usuario) ? implode(',', $zonas_ids_usuario) : ''; ?>">
 
-
-<!-- Selector de zonas (multi-selección tipo horas) -->
-<div class="formulario__campo">
-    <label class="formulario__label">Seleccionar Zonas</label>
-    <ul id="zonas" class="horas zonas"></ul>
-    <input type="hidden" name="zonas_ids" id="zonas_ids" value="<?php echo isset($usuario->zonas_ids) ? implode(',', $usuario->zonas_ids) : ''; ?>">
-    <div id="mensaje-zonas" class="formulario__mensaje"></div>
-</div>
-
-
+            <div id="mensaje-zonas" class="formulario__mensaje"></div>
+        </div>
 
         <div class="formulario__campo">
             <label class="formulario__label" for="password">Password</label>

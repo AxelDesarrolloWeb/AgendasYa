@@ -4,7 +4,9 @@ namespace Model;
 
 class Usuario extends ActiveRecord {
     protected static $tabla = 'usuarios';
-    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin', 'imagen', 'cuidad', 'zonas'];
+    // Añadimos ciudad_id para persistir la ciudad seleccionada en el perfil.
+    // Mantenemos 'cuidad' y 'zonas' por compatibilidad si existen en la BD.
+    protected static $columnasDB = ['id', 'nombre', 'apellido', 'email', 'password', 'confirmado', 'token', 'admin', 'imagen', 'cuidad', 'zonas', 'ciudad_id'];
 
     public $id;
     public $nombre;
@@ -18,6 +20,7 @@ class Usuario extends ActiveRecord {
     public $imagen;
     public $cuidad;
     public $zonas;
+    public $ciudad_id;
 
     public $password_actual;
     public $password_nuevo;
@@ -37,6 +40,26 @@ class Usuario extends ActiveRecord {
         $this->imagen = $args['imagen'] ?? '';
         $this->cuidad = $args['cuidad'] ?? '';
         $this->zonas = $args['zonas'] ?? '';
+        $this->ciudad_id = $args['ciudad_id'] ?? null;
+    }
+
+    // Validación para actualización de perfil (no exige password ni imagen obligatorios)
+    public function validarPerfil() {
+        static::$alertas = [];
+        if(!$this->nombre) {
+            self::$alertas['error'][] = 'El Nombre es Obligatorio';
+        }
+        if(!$this->apellido) {
+            self::$alertas['error'][] = 'El Apellido es Obligatorio';
+        }
+        if(!$this->email) {
+            self::$alertas['error'][] = 'El Email es Obligatorio';
+        } elseif(!filter_var($this->email, FILTER_VALIDATE_EMAIL)) {
+            self::$alertas['error'][] = 'Email no válido';
+        }
+        // La ciudad puede ser opcional según la lógica de negocio. Si la quieres obligatoria, descomenta:
+        // if(!$this->ciudad_id) { self::$alertas['error'][] = 'La ciudad es obligatoria'; }
+        return self::$alertas;
     }
 
     // Validar el Login de Usuarios
