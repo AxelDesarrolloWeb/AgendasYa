@@ -6,6 +6,7 @@ use MVC\Router;
 use Controllers\APIEventos;
 use Controllers\APIPonentes;
 use Controllers\APIRegalos;
+use Controllers\APIClima;
 use Controllers\AuthController;
 use Controllers\EventosController;
 use Controllers\PaginasController;
@@ -65,6 +66,7 @@ $router->get('/api/eventos-horario', [APIEventos::class, 'index']);
 $router->get('/api/ponentes', [APIPonentes::class, 'index']);
 $router->get('/api/ponente', [APIPonentes::class, 'ponente']);
 $router->get('/api/regalos', [APIRegalos::class, 'index']);
+$router->get('/api/clima', [APIClima::class, 'index']);
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 
@@ -86,6 +88,7 @@ $router->get('/sobre-nosotros', [PaginasController::class, 'sobre_nosotros']);
 $router->get('/planes', [PaginasController::class, 'planes']);
 $router->get('/publicaciones', [PaginasController::class, 'publicaciones']);
 $router->get('/agendaya', [PaginasController::class, 'agendaya']);
+$router->get('/clima', [PaginasController::class, 'clima']);
 $router->get('/404', [PaginasController::class, 'error']);
 
 $router->comprobarRutas();

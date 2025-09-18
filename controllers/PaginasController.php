@@ -130,6 +130,14 @@ class PaginasController
         ]);
     }
 
+    public static function clima(Router $router)
+    {
+
+        $router->render('paginas/clima', [
+            'titulo' => 'Clima actual'
+        ]);
+    }
+
     public static function error(Router $router)
     {
 
