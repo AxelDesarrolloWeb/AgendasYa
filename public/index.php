@@ -8,6 +8,7 @@ use Controllers\APIPonentes;
 use Controllers\APIRegalos;
 use Controllers\APIClima;
 use Controllers\APIZonas;
+use Controllers\APIClimaLecturas;
 use Controllers\AuthController;
 use Controllers\EventosController;
 use Controllers\PaginasController;
@@ -69,6 +70,10 @@ $router->get('/api/ponente', [APIPonentes::class, 'ponente']);
 $router->get('/api/regalos', [APIRegalos::class, 'index']);
 $router->get('/api/clima', [APIClima::class, 'index']);
 $router->get('/api/mis-zonas', [APIZonas::class, 'misZonas']);
+// Clima lecturas con límites y fallback
+$router->get('/api/clima/proveedor-actual', [APIClimaLecturas::class, 'proveedorActual']);
+$router->get('/api/clima/estado-actual', [APIClimaLecturas::class, 'estado']);
+$router->post('/api/clima/guardar', [APIClimaLecturas::class, 'guardar']);
 
 $router->get('/admin/registrados', [RegistradosController::class, 'index']);
 
