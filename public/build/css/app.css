@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html {
   line-height: 1.15; /* 1 */
   -webkit-text-size-adjust: 100%; /* 2 */
@@ -376,28 +377,160 @@ h3 {
   font-size: 2rem;
 }
 
-.agendasya__grid {
-  display: grid;
-  gap: 3rem;
-  grid-template-columns: repeat(1, 1fr);
-  width: min(95%, 140rem);
-  margin: 0 auto;
+/* Contenedor general de la página */
+.agendasya {
+  /* Tarjeta/Sección contenedora principal */
+  /* Zona de controles superiores */
+  /* Inputs y estados */
+  /* Panel de clima */
+  /* Calendario y consola */
 }
-@media (min-width: 768px) {
-  .agendasya__grid {
-    display: grid;
-    gap: 5rem;
-    grid-template-columns: repeat(2, 1fr);
-    align-items: center;
-  }
+.agendasya__heading { /* opcional: estilos de título */ }
+.agendasya__descripcion { /* opcional: estilos de descripción */ }
+.agendasya__section {
+  max-width: 1000px;
+  margin: 1rem auto;
+  padding: 1rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
 }
-.agendasya__texto {
-  line-height: 2;
+.agendasya__zonas {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: flex-end;
 }
-.agendasya .fc .fc-daygrid-day.fc-day-today {
-  background-color: #EA044E;
+.agendasya__zona {
+  flex: 1;
+  min-width: 260px;
+}
+.agendasya__label {
+  display: block;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+.agendasya__select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: #fff;
+  color: #111827;
+}
+.agendasya__select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+.agendasya__status {
+  margin-top: 0.25rem;
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.agendasya__clima-panel {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.75rem;
+  min-width: 260px;
+  flex: 1;
+}
+.agendasya__clima-title {
+  font-weight: 700;
+  color: #111827;
+}
+.agendasya__clima-content {
+  margin-top: 0.25rem;
+  color: #374151;
+  font-size: 0.95rem;
+}
+.agendasya__clima-actions, .agendasya__forecast-actions, .agendasya__hourly-actions {
+  margin-top: 0.5rem;
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.agendasya__clima-msg {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+.agendasya__toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #374151;
+  font-size: 0.9rem;
+}
+.agendasya__toggle input[type=checkbox] {
+  accent-color: #2563eb;
+  width: 16px;
+  height: 16px;
+}
+.agendasya__calendar {
+  margin-top: 1rem;
+}
+.agendasya__calendar-inner {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 0.5rem;
+}
+.agendasya__console {
+  margin-top: 1rem;
+  background: #0b1020;
+  color: #cbd5e1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  overflow: auto;
+  max-height: 300px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.85rem;
 }
 
+/* Botones base + variantes */
+.boton {
+  padding: 0.45rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  transition: filter 0.15s ease;
+  /* azul */
+  /* verde */
+  /* violeta */
+}
+.boton:hover {
+  filter: brightness(0.95);
+}
+.boton:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+.boton--primary {
+  background: #2563eb;
+}
+.boton--success {
+  background: #059669;
+}
+.boton--violet {
+  background: #7c3aed;
+}
+
+/* Ajustes responsivos mínimos */
+@media (max-width: 640px) {
+  .agendasya__zonas {
+    gap: 0.75rem;
+  }
+  .agendasya__clima-panel {
+    padding: 0.65rem;
+  }
+  .agendasya__calendar-inner {
+    padding: 0.4rem;
+  }
+}
 .planes__grid {
   width: min(95%, 140rem);
   margin: 0 auto;
