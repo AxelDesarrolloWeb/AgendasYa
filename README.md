@@ -844,3 +844,47 @@ INSERT INTO `zonas` (`id`, `nombres`, `ciudad_id`, `lat`, `lon`) VALUES
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+
+
+
+
+
+### SOBRE LOS COMENTARIOS, PUNTUACIONES, ETC:
+📝 Sistema de Comentarios, Reseñas y Puntuaciones
+
+Cada repartidor puede calificar sus días de trabajo del 1 al 5 ⭐ según cómo le fue, indicando:
+
+📅 Día exacto.
+
+🕐 Franja horaria o rango de horas (mañana, tarde, noche, o más específico).
+
+🗣️ Comentario descriptivo (opcional).
+
+📸 Foto (opcional, ej.: zona peligrosa, condiciones del día, etc.).
+
+Estas reseñas no solo se muestran, sino que el sistema las usa para generar datos inteligentes:
+
+Calcula un promedio de puntuación por día y franja horaria.
+
+Detecta tendencias y patrones (por ejemplo, si todos califican con 5⭐ los viernes a la noche en cierta zona).
+
+El sistema puede usar puntuaciones de semanas anteriores o del mismo día en meses previos para predecir la demanda futura.
+
+Los datos se pueden filtrar por:
+
+📍 Ciudad y zona (el repartidor solo ve info relevante a su zona).
+
+🚴‍♂️ Tipo de vehículo (moto, bicicleta, auto, etc.).
+
+💰 Promedio de ganancias (si el usuario decide compartirlas).
+
+Los comentarios también alimentan el calendario de demanda:
+
+Las franjas horarias con altas puntuaciones se marcan 🔥.
+
+Estas puntuaciones se combinan con datos externos (clima y partidos de fútbol) para generar un puntaje final predictivo.
+
+En el filtro “Personal” el sistema se basa únicamente en las reseñas del repartidor.
+
+En el filtro “General” se tienen en cuenta las puntuaciones de todos los repartidores de la zona para mostrar un mapa de demanda colaborativo.
